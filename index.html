@@ -3,124 +3,123 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SIPRO+ | Gestão da Rede</title>
+<title>SIPRO+ | Painel de Controle</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <div class="app-shell" id="appShell">
 
-  <!-- Backdrop mobile -->
+  <!-- Backdrop para fechar a sidebar no mobile -->
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-  <!-- ============================================================
+  <!-- ==================================================================
        SIDEBAR
-  ============================================================= -->
-  <aside class="sidebar" id="sidebar" aria-label="Menu de navegação">
+  =================================================================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Menu de navegação principal">
 
     <div class="sidebar__brand">
-      <div class="sidebar__brand-logo">SP</div>
-      <span class="sidebar__brand-name">SIPRO<span style="color:var(--color-primary)">+</span></span>
+      <div class="sidebar__brand-logo">S+</div>
+      <span class="sidebar__brand-name">SIPRO<span class="brand-accent">+</span></span>
     </div>
 
     <div class="menu-search">
       <div class="menu-search__input-wrap">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/></svg>
-        <input type="text" id="menuSearchInput" placeholder="Buscar no menu..." autocomplete="off" />
+        <svg class="menu-search__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/>
+        </svg>
+        <input type="text" id="menuSearchInput" placeholder="Buscar no menu..." autocomplete="off" aria-label="Buscar no menu" />
       </div>
     </div>
 
-    <nav class="sidebar-nav" id="sidebarNav">
+    <nav class="sidebar-nav" id="sidebarNav" aria-label="Navegação">
 
       <!-- INÍCIO -->
-      <div class="menu-category is-open" data-category="inicio">
-        <button class="menu-category__label" type="button">
-          <svg class="icon-category" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5 10 4l7 5.5"/><path d="M5 8.5V16a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8.5"/></svg>
-          <span>Início</span>
-          <svg class="icon-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
-        </button>
-        <div class="menu-category__items">
-          <ul>
-            <li><a href="#" class="menu-item is-active" data-page="dashboard" data-keywords="dashboard painel resumo home">Painel Geral</a></li>
-          </ul>
-        </div>
-      </div>
+      <ul class="menu-top-level">
+        <li class="menu-single">
+          <a href="#" class="menu-item is-active" data-keywords="inicio painel dashboard visao geral">
+            <svg class="menu-item__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 9.5 10 4l7 5.5"/><path d="M5 8.5V16a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8.5"/></svg>
+            <span class="menu-item__label">Início</span>
+          </a>
+        </li>
+      </ul>
 
       <!-- GESTÃO DA REDE -->
-      <div class="menu-category is-open" data-category="gestao-rede">
-        <button class="menu-category__label" type="button">
-          <svg class="icon-category" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>
-          <span>Gestão da Rede</span>
-          <svg class="icon-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+      <div class="menu-group" data-group="gestao-rede">
+        <button class="menu-group__toggle" type="button" aria-expanded="false">
+          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>
+          <span class="menu-group__label">Gestão da Rede</span>
+          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
         </button>
-        <div class="menu-category__items">
-          <ul>
-            <li><a href="#" class="menu-item is-active" data-page="usuarios" data-keywords="usuarios da rede login senha perfil acesso operador gestor admin">Usuários da Rede</a></li>
-            <li><a href="#" class="menu-item" data-keywords="escolas unidades cadastro de escola">Escolas da Rede</a></li>
-            <li><a href="#" class="menu-item" data-keywords="parametros configuracoes gerais rede">Parâmetros da Rede</a></li>
+        <div class="menu-group__panel">
+          <ul class="menu-sub-level">
+            <li><a href="#" class="menu-item" data-keywords="dados da rede cadastro geral">Dados da Rede</a></li>
+            <li><a href="#" class="menu-item" data-keywords="unidades escolares escolas">Unidades Escolares</a></li>
+            <li><a href="#" class="menu-item" data-keywords="parametros globais configuracao geral">Parâmetros Globais</a></li>
           </ul>
         </div>
       </div>
 
       <!-- ESTRUTURA ACADÊMICA -->
-      <div class="menu-category" data-category="estrutura">
-        <button class="menu-category__label" type="button">
-          <svg class="icon-category" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6l7-3 7 3-7 3-7-3Z"/><path d="M6 8.5V13c0 1 2 2 4 2s4-1 4-2V8.5"/></svg>
-          <span>Estrutura Acadêmica</span>
-          <svg class="icon-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+      <div class="menu-group" data-group="estrutura-academica">
+        <button class="menu-group__toggle" type="button" aria-expanded="false">
+          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6l7-3 7 3-7 3-7-3Z"/><path d="M6 8.5V13c0 1 2 2 4 2s4-1 4-2V8.5"/></svg>
+          <span class="menu-group__label">Estrutura Acadêmica</span>
+          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
         </button>
-        <div class="menu-category__items">
-          <ul>
-            <li><a href="#" class="menu-item" data-keywords="anos letivos periodos divisoes">Anos Letivos</a></li>
-            <li><a href="#" class="menu-item" data-keywords="turmas enturmacao">Turmas</a></li>
+        <div class="menu-group__panel">
+          <ul class="menu-sub-level">
+            <li><a href="#" class="menu-item" data-keywords="anos letivos periodo letivo">Anos Letivos</a></li>
+            <li><a href="#" class="menu-item" data-keywords="parametros avaliativos notas conceitos">Parâmetros Avaliativos</a></li>
+            <li><a href="#" class="menu-item" data-keywords="matrizes curriculares grade curricular">Matrizes Curriculares</a></li>
             <li><a href="#" class="menu-item" data-keywords="componentes curriculares disciplinas">Componentes Curriculares</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- PESSOAS -->
-      <div class="menu-category" data-category="pessoas">
-        <button class="menu-category__label" type="button">
-          <svg class="icon-category" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-          <span>Pessoas</span>
-          <svg class="icon-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+      <!-- GESTÃO DE PESSOAS -->
+      <div class="menu-group" data-group="gestao-pessoas">
+        <button class="menu-group__toggle" type="button" aria-expanded="false">
+          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
+          <span class="menu-group__label">Gestão de Pessoas</span>
+          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
         </button>
-        <div class="menu-category__items">
-          <ul>
-            <li><a href="#" class="menu-item" data-keywords="alunos matriculas">Alunos</a></li>
-            <li><a href="#" class="menu-item" data-keywords="professores contratados">Professores</a></li>
-            <li><a href="#" class="menu-item" data-keywords="responsaveis familiares">Responsáveis</a></li>
+        <div class="menu-group__panel">
+          <ul class="menu-sub-level">
+            <li><a href="#" class="menu-item" data-keywords="usuarios do sistema login acesso">Usuários do Sistema</a></li>
+            <li><a href="#" class="menu-item" data-keywords="professores servidores docentes">Professores/Servidores</a></li>
+            <li><a href="#" class="menu-item" data-keywords="alunos matriculas estudantes">Alunos &amp; Matrículas</a></li>
           </ul>
         </div>
       </div>
 
       <!-- RELATÓRIOS -->
-      <div class="menu-category" data-category="relatorios">
-        <button class="menu-category__label" type="button">
-          <svg class="icon-category" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3h7l3 3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 10h6M7 13h6M7 7h3"/></svg>
-          <span>Relatórios</span>
-          <svg class="icon-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+      <div class="menu-group" data-group="relatorios">
+        <button class="menu-group__toggle" type="button" aria-expanded="false">
+          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 3h7l3 3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 10h6M7 13h6M7 7h3"/></svg>
+          <span class="menu-group__label">Relatórios</span>
+          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
         </button>
-        <div class="menu-category__items">
-          <ul>
-            <li><a href="#" class="menu-item" data-keywords="frequencia relatorio de frequencia">Frequência</a></li>
-            <li><a href="#" class="menu-item" data-keywords="desempenho notas avaliacoes">Desempenho</a></li>
-            <li><a href="#" class="menu-item" data-keywords="exportar dados simade inep">Exportações</a></li>
+        <div class="menu-group__panel">
+          <ul class="menu-sub-level">
+            <li><a href="#" class="menu-item" data-keywords="relatorios academicos boletim frequencia">Acadêmicos</a></li>
+            <li><a href="#" class="menu-item" data-keywords="relatorios administrativos gestao">Administrativos</a></li>
+            <li><a href="#" class="menu-item" data-keywords="censo escolar inep simade">Censo Escolar</a></li>
           </ul>
         </div>
       </div>
 
       <!-- CONFIGURAÇÕES -->
-      <div class="menu-category" data-category="config">
-        <button class="menu-category__label" type="button">
-          <svg class="icon-category" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="2.5"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2M15.4 4.6l-1.4 1.4M6 12.6l-1.4 1.4M15.4 15.4l-1.4-1.4M6 7.4 4.6 6"/></svg>
-          <span>Configurações</span>
-          <svg class="icon-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l6 6-6 6"/></svg>
+      <div class="menu-group" data-group="configuracoes">
+        <button class="menu-group__toggle" type="button" aria-expanded="false">
+          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="2.5"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2M15.4 4.6l-1.4 1.4M6 12.6l-1.4 1.4M15.4 15.4l-1.4-1.4M6 7.4 4.6 6"/></svg>
+          <span class="menu-group__label">Configurações</span>
+          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
         </button>
-        <div class="menu-category__items">
-          <ul>
-            <li><a href="#" class="menu-item" data-keywords="perfis de acesso permissoes">Perfis de Acesso</a></li>
-            <li><a href="#" class="menu-item" data-keywords="integracao api tokens">Integrações</a></li>
+        <div class="menu-group__panel">
+          <ul class="menu-sub-level">
+            <li><a href="#" class="menu-item" data-keywords="perfis de acesso permissoes papeis">Perfis de Acesso</a></li>
+            <li><a href="#" class="menu-item" data-keywords="logs do sistema auditoria historico">Logs do Sistema</a></li>
           </ul>
         </div>
       </div>
@@ -128,356 +127,141 @@
     </nav>
 
     <div class="sidebar__footer">
-      <button class="sidebar-toggle" id="sidebarToggleBtn" type="button" title="Recolher menu">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4l-6 6 6 6"/></svg>
-      </button>
+      <span class="sidebar__version">SIPRO+ v1.0.0</span>
     </div>
   </aside>
 
-  <!-- ============================================================
-       CONTEÚDO
-  ============================================================= -->
+  <!-- ==================================================================
+       CONTEÚDO (Topbar + Main)
+  =================================================================== -->
   <div class="app-main">
 
-    <!-- TOPBAR -->
+    <!-- ================================================================
+         TOPBAR
+    ================================================================= -->
     <header class="topbar">
+
       <div class="topbar__left">
-        <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" title="Abrir menu">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        <button class="icon-btn sidebar-toggle-btn" id="sidebarToggleBtn" type="button" aria-label="Alternar menu lateral" aria-controls="sidebar" aria-expanded="true">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
         </button>
 
-        <div class="network-switcher" id="networkSwitcher" title="Trocar rede/escola">
-          <div class="network-switcher__icon">RM</div>
-          <div class="network-switcher__text">
-            <div class="network-switcher__name">Rede Municipal de Educação</div>
-            <div class="network-switcher__type">Rede Ativa · rede_id: 1</div>
-          </div>
+        <div class="network-badge">
+          <span class="network-badge__name">Rede Municipal de Ensino — Governo de Demonstração</span>
+          <span class="tag tag-multitenant">Multi-tenant</span>
         </div>
-      </div>
-
-      <div class="topbar__search">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/></svg>
-        <input type="text" placeholder="Busca global (alunos, turmas, usuários...)" />
       </div>
 
       <div class="topbar__right">
-        <button class="icon-btn" title="Notificações">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a4 4 0 1 1 8 0c0 3 1 4 1 4H5s1-1 1-4Z"/><path d="M8.5 15a1.5 1.5 0 0 0 3 0"/></svg>
-          <span class="icon-btn__badge">3</span>
+
+        <button class="global-search" id="globalSearchBtn" type="button" aria-label="Busca global">
+          <svg class="global-search__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/></svg>
+          <span class="global-search__placeholder">Buscar em toda a aplicação...</span>
+          <kbd class="global-search__kbd">Ctrl K</kbd>
+        </button>
+
+        <button class="icon-btn" id="notificationsBtn" type="button" aria-label="Notificações">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 8a4 4 0 1 1 8 0c0 3 1 4 1 4H5s1-1 1-4Z"/><path d="M8.5 15a1.5 1.5 0 0 0 3 0"/></svg>
+          <span class="icon-btn__badge">5</span>
         </button>
 
         <div class="user-menu" id="userMenu">
-          <div class="avatar">AS</div>
-          <div class="user-menu__info">
-            <span class="user-menu__name">Ana Silva</span>
-            <span class="user-menu__role">Gestora da Rede</span>
+          <button class="user-menu__trigger" id="userMenuTrigger" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="avatar">AG</span>
+            <span class="user-menu__info">
+              <span class="user-menu__name">Administrador Geral</span>
+              <span class="user-menu__role">Super Admin</span>
+            </span>
+            <svg class="user-menu__chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
+          </button>
+
+          <div class="user-menu__dropdown" id="userMenuDropdown">
+            <a href="#" class="user-menu__dropdown-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
+              Perfil
+            </a>
+            <a href="#" class="user-menu__dropdown-item">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7l6-4 6 4v6l-6 4-6-4V7Z"/></svg>
+              Alternar Rede
+            </a>
+            <div class="user-menu__divider"></div>
+            <a href="#" class="user-menu__dropdown-item user-menu__dropdown-item--danger">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 4H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/><path d="M13 14l4-4-4-4M17 10H8"/></svg>
+              Sair
+            </a>
           </div>
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
         </div>
+
       </div>
     </header>
 
-    <!-- ============================================================
-         PÁGINA: DASHBOARD
-    ============================================================= -->
-    <main class="main-content" id="page-dashboard">
+    <!-- ================================================================
+         MAIN CONTENT — DASHBOARD
+    ================================================================= -->
+    <main class="main-content">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <span>Início</span>
+        <svg class="breadcrumb__sep" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
+        <span class="breadcrumb__current">Dashboard</span>
+      </nav>
 
       <div class="page-header">
-        <div>
-          <div class="page-header__title">Painel Geral</div>
-          <div class="page-header__subtitle">Visão geral da Rede Municipal de Educação</div>
-        </div>
+        <h1 class="page-header__title">Painel de Controle — Visão Geral</h1>
       </div>
 
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-card__label">Escolas na Rede</div>
-          <div class="stat-card__value">18</div>
-          <div class="stat-card__delta up">▲ 2 novas este ano</div>
+      <section class="quick-access" aria-labelledby="quickAccessTitle">
+        <h2 id="quickAccessTitle" class="section-title">Atalhos Rápidos</h2>
+
+        <div class="quick-grid">
+
+          <a href="#" class="quick-card">
+            <span class="quick-card__icon quick-card__icon--orange">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 6l7-3 7 3-7 3-7-3Z"/><path d="M6 8.5V13c0 1 2 2 4 2s4-1 4-2V8.5"/></svg>
+            </span>
+            <h3 class="quick-card__title">Nova Matriz Curricular</h3>
+            <p class="quick-card__desc">Monte a grade de componentes por etapa e ano letivo.</p>
+          </a>
+
+          <a href="#" class="quick-card">
+            <span class="quick-card__icon quick-card__icon--blue">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15 4v4M13 6h4"/></svg>
+            </span>
+            <h3 class="quick-card__title">Cadastrar Usuário</h3>
+            <p class="quick-card__desc">Adicione novos acessos administrativos à rede.</p>
+          </a>
+
+          <a href="#" class="quick-card">
+            <span class="quick-card__icon quick-card__icon--green">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="4" width="13" height="12" rx="1.5"/><path d="M3.5 8h13M7 4v-.5M13 4v-.5"/></svg>
+            </span>
+            <h3 class="quick-card__title">Abrir Ano Letivo</h3>
+            <p class="quick-card__desc">Configure o novo período letivo para as unidades.</p>
+          </a>
+
+          <a href="#" class="quick-card">
+            <span class="quick-card__icon quick-card__icon--purple">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/></svg>
+            </span>
+            <h3 class="quick-card__title">Consultar Aluno</h3>
+            <p class="quick-card__desc">Localize matrículas e histórico escolar rapidamente.</p>
+          </a>
+
+          <a href="#" class="quick-card">
+            <span class="quick-card__icon quick-card__icon--teal">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 3h7l3 3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 10h6M7 13h6M7 7h3"/></svg>
+            </span>
+            <h3 class="quick-card__title">Emitir Relatórios</h3>
+            <p class="quick-card__desc">Gere relatórios acadêmicos e administrativos.</p>
+          </a>
+
         </div>
-        <div class="stat-card">
-          <div class="stat-card__label">Alunos Matriculados</div>
-          <div class="stat-card__value">6.412</div>
-          <div class="stat-card__delta up">▲ 3,1% vs. 2025</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__label">Usuários Ativos</div>
-          <div class="stat-card__value">312</div>
-          <div class="stat-card__delta down">▼ 4 inativados</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__label">Turmas em Andamento</div>
-          <div class="stat-card__value">248</div>
-          <div class="stat-card__delta up">▲ Ano letivo em curso</div>
-        </div>
-      </div>
+      </section>
 
-      <div class="panel__title" style="margin-bottom:14px;">Acesso Rápido</div>
-
-      <div class="quick-access-grid">
-
-        <a href="#" class="quick-card" data-page="usuarios">
-          <div class="quick-card__icon quick-card__icon--blue">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-          </div>
-          <div class="quick-card__title">Usuários da Rede</div>
-          <div class="quick-card__desc">Gerencie logins, perfis e permissões de acesso ao sistema.</div>
-          <div class="quick-card__link">Acessar <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></div>
-        </a>
-
-        <a href="#" class="quick-card">
-          <div class="quick-card__icon quick-card__icon--green">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h12M4 10h12M4 14h8"/></svg>
-          </div>
-          <div class="quick-card__title">Escolas da Rede</div>
-          <div class="quick-card__desc">Cadastro e configuração das unidades escolares.</div>
-          <div class="quick-card__link">Acessar <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></div>
-        </a>
-
-        <a href="#" class="quick-card">
-          <div class="quick-card__icon quick-card__icon--purple">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6l7-3 7 3-7 3-7-3Z"/><path d="M6 8.5V13c0 1 2 2 4 2s4-1 4-2V8.5"/></svg>
-          </div>
-          <div class="quick-card__title">Turmas</div>
-          <div class="quick-card__desc">Enturmação, componentes curriculares e horários.</div>
-          <div class="quick-card__link">Acessar <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></div>
-        </a>
-
-        <a href="#" class="quick-card">
-          <div class="quick-card__icon quick-card__icon--orange">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 3h7l3 3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 10h6M7 13h6M7 7h3"/></svg>
-          </div>
-          <div class="quick-card__title">Relatórios</div>
-          <div class="quick-card__desc">Frequência, desempenho e exportações SIMADE/INEP.</div>
-          <div class="quick-card__link">Acessar <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></div>
-        </a>
-
-        <a href="#" class="quick-card">
-          <div class="quick-card__icon quick-card__icon--pink">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-          </div>
-          <div class="quick-card__title">Alunos</div>
-          <div class="quick-card__desc">Cadastro, matrícula e transferência de alunos.</div>
-          <div class="quick-card__link">Acessar <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></div>
-        </a>
-
-        <a href="#" class="quick-card">
-          <div class="quick-card__icon quick-card__icon--teal">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="2.5"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2"/></svg>
-          </div>
-          <div class="quick-card__title">Configurações</div>
-          <div class="quick-card__desc">Perfis de acesso, parâmetros gerais da rede.</div>
-          <div class="quick-card__link">Acessar <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 4l6 6-6 6"/></svg></div>
-        </a>
-
-      </div>
     </main>
-
-    <!-- ============================================================
-         PÁGINA: USUÁRIOS DA REDE (CRUD)
-    ============================================================= -->
-    <main class="main-content hidden" id="page-usuarios">
-
-      <div class="breadcrumb">Gestão da Rede / <span class="current">Usuários da Rede</span></div>
-
-      <div class="page-header">
-        <div>
-          <div class="page-header__title">Usuários da Rede</div>
-          <div class="page-header__subtitle">Gerencie os acessos administrativos vinculados a esta rede</div>
-        </div>
-        <button class="btn btn-primary" id="btnNovoUsuario" type="button">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 4v12M4 10h12"/></svg>
-          Novo Usuário
-        </button>
-      </div>
-
-      <div class="panel">
-        <div class="panel__header">
-          <div class="list-toolbar">
-            <div class="search-field">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/></svg>
-              <input type="text" id="userSearchInput" placeholder="Buscar por nome, CPF ou e-mail..." />
-            </div>
-            <div class="select-field">
-              <select id="userStatusFilter">
-                <option value="">Todas as situações</option>
-                <option value="ativo">Ativo</option>
-                <option value="inativo">Inativo</option>
-              </select>
-            </div>
-            <div class="select-field">
-              <select id="userRoleFilter">
-                <option value="">Todos os perfis</option>
-                <option value="super_admin">Super Admin</option>
-                <option value="gestor_rede">Gestor da Rede</option>
-                <option value="operador">Operador</option>
-              </select>
-            </div>
-          </div>
-          <span class="text-muted" id="userResultsCount">0 usuários encontrados</span>
-        </div>
-
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th class="sortable" data-sort="nome">Usuário</th>
-                <th class="sortable" data-sort="cpf">CPF</th>
-                <th class="sortable" data-sort="perfil">Perfil de Acesso</th>
-                <th class="sortable" data-sort="situacao">Situação</th>
-                <th style="text-align:right;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="userTableBody">
-              <!-- Linhas geradas via JS -->
-            </tbody>
-          </table>
-
-          <div class="empty-state hidden" id="userEmptyState">
-            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/></svg>
-            <div>Nenhum usuário encontrado para os filtros aplicados.</div>
-          </div>
-        </div>
-
-        <div class="pagination">
-          <span id="paginationInfo">Mostrando 0 de 0</span>
-          <div class="pagination__pages" id="paginationPages"></div>
-        </div>
-      </div>
-    </main>
-
   </div>
 </div>
 
-<!-- ============================================================
-     MODAL: CADASTRO / EDIÇÃO DE USUÁRIO DA REDE
-============================================================= -->
-<div class="modal-overlay" id="userModalOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="userModalTitle">
-    <form id="userForm" novalidate>
-
-      <div class="modal__header">
-        <div>
-          <div class="modal__title" id="userModalTitle">Novo Usuário da Rede</div>
-          <div class="modal__subtitle">Os acessos são vinculados automaticamente à rede ativa (<span id="modalRedeLabel">rede_id: 1</span>)</div>
-        </div>
-        <button type="button" class="modal__close" id="userModalCloseBtn" aria-label="Fechar">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5l10 10M15 5L5 15"/></svg>
-        </button>
-      </div>
-
-      <div class="modal__body">
-        <div class="form-grid">
-
-          <div class="form-section">Dados Pessoais</div>
-
-          <div class="form-field full">
-            <label for="fieldNome">Nome Completo <span class="required">*</span></label>
-            <input type="text" id="fieldNome" name="nome" placeholder="Ex: Ana Paula da Silva" autocomplete="off" required />
-            <span class="field-error">Informe o nome completo.</span>
-          </div>
-
-          <div class="form-field">
-            <label for="fieldCpf">CPF <span class="required">*</span></label>
-            <input type="text" id="fieldCpf" name="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required />
-            <span class="field-error">Informe um CPF válido.</span>
-          </div>
-
-          <div class="form-field">
-            <label for="fieldPerfil">Perfil de Acesso <span class="required">*</span></label>
-            <select id="fieldPerfil" name="perfil" required>
-              <option value="">Selecione...</option>
-              <option value="super_admin">Super Admin</option>
-              <option value="gestor_rede">Gestor da Rede</option>
-              <option value="operador">Operador</option>
-            </select>
-            <span class="field-error">Selecione um perfil de acesso.</span>
-          </div>
-
-          <div class="form-section">Acesso ao Sistema</div>
-
-          <div class="form-field full">
-            <label for="fieldEmail">E-mail / Login <span class="required">*</span></label>
-            <input type="email" id="fieldEmail" name="email" placeholder="usuario@rede.edu.br" autocomplete="off" required />
-            <span class="field-error">Informe um e-mail válido.</span>
-          </div>
-
-          <div class="form-field full">
-            <label for="fieldSenha">Senha <span class="required">*</span></label>
-            <div class="password-field-wrap">
-              <input type="password" id="fieldSenha" name="senha" placeholder="Mínimo de 8 caracteres" autocomplete="new-password" required />
-              <button type="button" class="password-toggle" id="togglePasswordBtn" aria-label="Mostrar senha">
-                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z"/><circle cx="10" cy="10" r="2.4"/></svg>
-              </button>
-            </div>
-            <span class="field-hint">Usada apenas no cadastro inicial. O usuário poderá alterá-la posteriormente.</span>
-            <span class="field-error">A senha deve ter ao menos 8 caracteres.</span>
-          </div>
-
-          <div class="form-section">Endereço</div>
-
-          <div class="form-field">
-            <label for="fieldCep">CEP</label>
-            <input type="text" id="fieldCep" name="cep" placeholder="00000-000" inputmode="numeric" maxlength="9" />
-          </div>
-
-          <div class="form-field">
-            <label for="fieldLogradouro">Logradouro</label>
-            <input type="text" id="fieldLogradouro" name="logradouro" placeholder="Rua, Avenida..." />
-          </div>
-
-          <div class="form-field">
-            <label for="fieldNumero">Número</label>
-            <input type="text" id="fieldNumero" name="numero" placeholder="Nº" />
-          </div>
-
-          <div class="form-field">
-            <label for="fieldBairro">Bairro</label>
-            <input type="text" id="fieldBairro" name="bairro" placeholder="Bairro" />
-          </div>
-
-          <div class="form-field">
-            <label for="fieldCidade">Cidade</label>
-            <input type="text" id="fieldCidade" name="cidade" placeholder="Cidade" />
-          </div>
-
-          <div class="form-field">
-            <label for="fieldUf">UF</label>
-            <select id="fieldUf" name="uf">
-              <option value="">UF</option>
-              <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
-              <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-              <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
-              <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
-              <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-              <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
-              <option>SP</option><option>SE</option><option>TO</option>
-            </select>
-          </div>
-
-          <div class="form-field full">
-            <label class="hidden" for="fieldSituacao">Situação</label>
-            <input type="hidden" id="fieldSituacao" name="situacao" value="ativo" />
-          </div>
-
-        </div>
-      </div>
-
-      <div class="modal__footer">
-        <button type="button" class="btn btn-secondary" id="userModalCancelBtn">Cancelar</button>
-        <button type="submit" class="btn btn-primary" id="userModalSaveBtn">Salvar Usuário</button>
-      </div>
-
-    </form>
-  </div>
-</div>
-
-<!-- Toasts -->
-<div class="toast-container" id="toastContainer"></div>
-
-<script src="menu.js"></script>
-<script src="api.js"></script>
-<script src="usuarios.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
