@@ -52,6 +52,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -456,7 +458,8 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 /* Busca global */
@@ -469,7 +472,9 @@ h1, h2, h3 {
   border: 1px solid var(--cor-borda);
   background: var(--cor-fundo-app);
   color: var(--cor-texto-secundario);
-  min-width: 260px;
+  width: 260px;
+  min-width: 0;
+  flex-shrink: 1;
   transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
 }
 
@@ -738,6 +743,16 @@ h1, h2, h3 {
 /* ==========================================================================
    Responsivo
    ========================================================================== */
+
+@media (max-width: 1279px) {
+  .global-search {
+    width: 200px;
+  }
+
+  .network-badge__name {
+    max-width: 220px;
+  }
+}
 
 @media (max-width: 960px) {
   .app-shell {
