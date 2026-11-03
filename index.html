@@ -3,265 +3,149 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SIPRO+ | Painel de Controle</title>
-<link rel="stylesheet" href="style.css" />
+<title>SIPRO | Entrar</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f3f4f6;
+    color: #1f2937;
+  }
+  .card {
+    width: 100%;
+    max-width: 360px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 28px 24px;
+  }
+  h1 { margin: 0 0 4px; font-size: 24px; }
+  .sub { margin: 0 0 20px; font-size: 14px; color: #6b7280; }
+  label { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 600; }
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+  }
+  input:focus { outline: 2px solid #93c5fd; border-color: #3b82f6; }
+  .ver { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 14px; font-weight: 400; }
+  button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 11px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: #2563eb;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button:disabled { background: #93c5fd; cursor: default; }
+  .erro {
+    display: none;
+    margin-top: 14px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #991b1b;
+    background: #fee2e2;
+    border-radius: 6px;
+  }
+</style>
 </head>
 <body>
+  <main class="card">
+    <h1>SIPRO</h1>
+    <p class="sub">Entre com seu CPF e senha.</p>
 
-<div class="app-shell" id="appShell">
+    <form id="form" novalidate>
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00" />
 
-  <!-- Backdrop para fechar a sidebar no mobile -->
-  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" autocomplete="current-password" />
 
-  <!-- ==================================================================
-       SIDEBAR
-  =================================================================== -->
-  <aside class="sidebar" id="sidebar" aria-label="Menu de navegação principal">
+      <label class="ver"><input type="checkbox" id="ver" /> Mostrar senha</label>
 
-    <div class="sidebar__brand">
-      <div class="sidebar__brand-logo">S+</div>
-      <span class="sidebar__brand-name">SIPRO<span class="brand-accent">+</span></span>
-    </div>
+      <div class="erro" id="erro" role="alert"></div>
 
-    <div class="menu-search">
-      <div class="menu-search__input-wrap">
-        <svg class="menu-search__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/>
-        </svg>
-        <input type="text" id="menuSearchInput" placeholder="Buscar no menu..." autocomplete="off" aria-label="Buscar no menu" />
-      </div>
-    </div>
+      <button type="submit" id="entrar">Entrar</button>
+    </form>
+  </main>
 
-    <nav class="sidebar-nav" id="sidebarNav" aria-label="Navegação">
+<script>
+  const form = document.getElementById('form');
+  const cpfEl = document.getElementById('cpf');
+  const senhaEl = document.getElementById('senha');
+  const verEl = document.getElementById('ver');
+  const erroEl = document.getElementById('erro');
+  const botao = document.getElementById('entrar');
 
-      <!-- INÍCIO -->
-      <ul class="menu-top-level">
-        <li class="menu-single">
-          <a href="#" class="menu-item is-active" data-keywords="inicio painel dashboard visao geral">
-            <svg class="menu-item__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 9.5 10 4l7 5.5"/><path d="M5 8.5V16a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8.5"/></svg>
-            <span class="menu-item__label">Início</span>
-          </a>
-        </li>
-      </ul>
+  function validarCpf(cpf) {
+    if (!/^\d{11}$/.test(cpf)) return false;
+    if (/^(\d)\1{10}$/.test(cpf)) return false;
+    for (let t = 9; t < 11; t++) {
+      let soma = 0;
+      for (let i = 0; i < t; i++) soma += Number(cpf[i]) * (t + 1 - i);
+      if (((soma * 10) % 11) % 10 !== Number(cpf[t])) return false;
+    }
+    return true;
+  }
 
-      <!-- GESTÃO DA REDE -->
-      <div class="menu-group" data-group="gestao-rede">
-        <button class="menu-group__toggle" type="button" aria-expanded="false">
-          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>
-          <span class="menu-group__label">Gestão da Rede</span>
-          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
-        </button>
-        <div class="menu-group__panel">
-          <ul class="menu-sub-level">
-            <li><a href="#" class="menu-item" data-keywords="dados da rede cadastro geral">Dados da Rede</a></li>
-            <li><a href="#" class="menu-item" data-keywords="unidades escolares escolas">Unidades Escolares</a></li>
-            <li><a href="#" class="menu-item" data-keywords="parametros globais configuracao geral">Parâmetros Globais</a></li>
-          </ul>
-        </div>
-      </div>
+  function mostrarErro(msg) {
+    erroEl.textContent = msg;
+    erroEl.style.display = 'block';
+  }
 
-      <!-- ESTRUTURA ACADÊMICA -->
-      <div class="menu-group" data-group="estrutura-academica">
-        <button class="menu-group__toggle" type="button" aria-expanded="false">
-          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6l7-3 7 3-7 3-7-3Z"/><path d="M6 8.5V13c0 1 2 2 4 2s4-1 4-2V8.5"/></svg>
-          <span class="menu-group__label">Estrutura Acadêmica</span>
-          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
-        </button>
-        <div class="menu-group__panel">
-          <ul class="menu-sub-level">
-            <li><a href="#" class="menu-item" data-keywords="anos letivos periodo letivo">Anos Letivos</a></li>
-            <li><a href="#" class="menu-item" data-keywords="parametros avaliativos notas conceitos">Parâmetros Avaliativos</a></li>
-            <li><a href="#" class="menu-item" data-keywords="matrizes curriculares grade curricular">Matrizes Curriculares</a></li>
-            <li><a href="#" class="menu-item" data-keywords="componentes curriculares disciplinas">Componentes Curriculares</a></li>
-          </ul>
-        </div>
-      </div>
+  function carregando(ativo) {
+    botao.disabled = ativo;
+    botao.textContent = ativo ? 'Entrando...' : 'Entrar';
+  }
 
-      <!-- GESTÃO DE PESSOAS -->
-      <div class="menu-group" data-group="gestao-pessoas">
-        <button class="menu-group__toggle" type="button" aria-expanded="false">
-          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-          <span class="menu-group__label">Gestão de Pessoas</span>
-          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
-        </button>
-        <div class="menu-group__panel">
-          <ul class="menu-sub-level">
-            <li><a href="#" class="menu-item" data-keywords="usuarios do sistema login acesso">Usuários do Sistema</a></li>
-            <li><a href="#" class="menu-item" data-keywords="professores servidores docentes">Professores/Servidores</a></li>
-            <li><a href="#" class="menu-item" data-keywords="alunos matriculas estudantes">Alunos &amp; Matrículas</a></li>
-          </ul>
-        </div>
-      </div>
+  verEl.addEventListener('change', () => {
+    senhaEl.type = verEl.checked ? 'text' : 'password';
+  });
 
-      <!-- RELATÓRIOS -->
-      <div class="menu-group" data-group="relatorios">
-        <button class="menu-group__toggle" type="button" aria-expanded="false">
-          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 3h7l3 3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 10h6M7 13h6M7 7h3"/></svg>
-          <span class="menu-group__label">Relatórios</span>
-          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
-        </button>
-        <div class="menu-group__panel">
-          <ul class="menu-sub-level">
-            <li><a href="#" class="menu-item" data-keywords="relatorios academicos boletim frequencia">Acadêmicos</a></li>
-            <li><a href="#" class="menu-item" data-keywords="relatorios administrativos gestao">Administrativos</a></li>
-            <li><a href="#" class="menu-item" data-keywords="censo escolar inep simade">Censo Escolar</a></li>
-          </ul>
-        </div>
-      </div>
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    erroEl.style.display = 'none';
 
-      <!-- CONFIGURAÇÕES -->
-      <div class="menu-group" data-group="configuracoes">
-        <button class="menu-group__toggle" type="button" aria-expanded="false">
-          <svg class="menu-group__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="2.5"/><path d="M10 2.5v2M10 15.5v2M17.5 10h-2M4.5 10h-2M15.4 4.6l-1.4 1.4M6 12.6l-1.4 1.4M15.4 15.4l-1.4-1.4M6 7.4 4.6 6"/></svg>
-          <span class="menu-group__label">Configurações</span>
-          <svg class="menu-group__chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
-        </button>
-        <div class="menu-group__panel">
-          <ul class="menu-sub-level">
-            <li><a href="#" class="menu-item" data-keywords="perfis de acesso permissoes papeis">Perfis de Acesso</a></li>
-            <li><a href="#" class="menu-item" data-keywords="logs do sistema auditoria historico">Logs do Sistema</a></li>
-          </ul>
-        </div>
-      </div>
+    const cpf = cpfEl.value.replace(/\D/g, '');
+    const senha = senhaEl.value;
 
-    </nav>
+    if (!validarCpf(cpf)) return mostrarErro('CPF inválido.');
+    if (!senha) return mostrarErro('Informe a senha.');
 
-    <div class="sidebar__footer">
-      <span class="sidebar__version">SIPRO+ v1.0.0</span>
-    </div>
-  </aside>
+    carregando(true);
+    try {
+      const resp = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cpf, senha }),
+      });
+      const dados = await resp.json().catch(() => ({}));
+      if (!resp.ok) {
+        mostrarErro(dados.erro || 'Não foi possível entrar.');
+        carregando(false);
+        return;
+      }
+      location.href = dados.redirecionar || '/front.html';
+    } catch (err) {
+      mostrarErro('Sem conexão com o servidor. Tente novamente.');
+      carregando(false);
+    }
+  });
 
-  <!-- ==================================================================
-       CONTEÚDO (Topbar + Main)
-  =================================================================== -->
-  <div class="app-main">
-
-    <!-- ================================================================
-         TOPBAR
-    ================================================================= -->
-    <header class="topbar">
-
-      <div class="topbar__left">
-        <button class="icon-btn sidebar-toggle-btn" id="sidebarToggleBtn" type="button" aria-label="Alternar menu lateral" aria-controls="sidebar" aria-expanded="true">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
-        </button>
-
-        <div class="network-badge">
-          <span class="network-badge__name">Rede Municipal de Ensino — Governo de Demonstração</span>
-          <span class="tag tag-multitenant">Multi-tenant</span>
-        </div>
-      </div>
-
-      <div class="topbar__right">
-
-        <button class="global-search" id="globalSearchBtn" type="button" aria-label="Busca global">
-          <svg class="global-search__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="9" r="6.5"/><line x1="14" y1="14" x2="18" y2="18"/></svg>
-          <span class="global-search__placeholder">Buscar em toda a aplicação...</span>
-          <kbd class="global-search__kbd">Ctrl K</kbd>
-        </button>
-
-        <button class="icon-btn" id="notificationsBtn" type="button" aria-label="Notificações">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 8a4 4 0 1 1 8 0c0 3 1 4 1 4H5s1-1 1-4Z"/><path d="M8.5 15a1.5 1.5 0 0 0 3 0"/></svg>
-          <span class="icon-btn__badge">5</span>
-        </button>
-
-        <div class="user-menu" id="userMenu">
-          <button class="user-menu__trigger" id="userMenuTrigger" type="button" aria-haspopup="true" aria-expanded="false">
-            <span class="avatar">AG</span>
-            <span class="user-menu__info">
-              <span class="user-menu__name">Administrador Geral</span>
-              <span class="user-menu__role">Super Admin</span>
-            </span>
-            <svg class="user-menu__chevron" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
-          </button>
-
-          <div class="user-menu__dropdown" id="userMenuDropdown">
-            <a href="#" class="user-menu__dropdown-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/></svg>
-              Perfil
-            </a>
-            <a href="#" class="user-menu__dropdown-item">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7l6-4 6 4v6l-6 4-6-4V7Z"/></svg>
-              Alternar Rede
-            </a>
-            <div class="user-menu__divider"></div>
-            <a href="#" class="user-menu__dropdown-item user-menu__dropdown-item--danger">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 4H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/><path d="M13 14l4-4-4-4M17 10H8"/></svg>
-              Sair
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </header>
-
-    <!-- ================================================================
-         MAIN CONTENT — DASHBOARD
-    ================================================================= -->
-    <main class="main-content">
-
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <span>Início</span>
-        <svg class="breadcrumb__sep" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4l6 6-6 6"/></svg>
-        <span class="breadcrumb__current">Dashboard</span>
-      </nav>
-
-      <div class="page-header">
-        <h1 class="page-header__title">Painel de Controle — Visão Geral</h1>
-      </div>
-
-      <section class="quick-access" aria-labelledby="quickAccessTitle">
-        <h2 id="quickAccessTitle" class="section-title">Atalhos Rápidos</h2>
-
-        <div class="quick-grid">
-
-          <a href="#" class="quick-card">
-            <span class="quick-card__icon quick-card__icon--orange">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 6l7-3 7 3-7 3-7-3Z"/><path d="M6 8.5V13c0 1 2 2 4 2s4-1 4-2V8.5"/></svg>
-            </span>
-            <h3 class="quick-card__title">Nova Matriz Curricular</h3>
-            <p class="quick-card__desc">Monte a grade de componentes por etapa e ano letivo.</p>
-          </a>
-
-          <a href="#" class="quick-card">
-            <span class="quick-card__icon quick-card__icon--blue">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M4 17c0-3 2.7-5 6-5s6 2 6 5"/><path d="M15 4v4M13 6h4"/></svg>
-            </span>
-            <h3 class="quick-card__title">Cadastrar Usuário</h3>
-            <p class="quick-card__desc">Adicione novos acessos administrativos à rede.</p>
-          </a>
-
-          <a href="#" class="quick-card">
-            <span class="quick-card__icon quick-card__icon--green">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="4" width="13" height="12" rx="1.5"/><path d="M3.5 8h13M7 4v-.5M13 4v-.5"/></svg>
-            </span>
-            <h3 class="quick-card__title">Abrir Ano Letivo</h3>
-            <p class="quick-card__desc">Configure o novo período letivo para as unidades.</p>
-          </a>
-
-          <a href="#" class="quick-card">
-            <span class="quick-card__icon quick-card__icon--purple">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/></svg>
-            </span>
-            <h3 class="quick-card__title">Consultar Aluno</h3>
-            <p class="quick-card__desc">Localize matrículas e histórico escolar rapidamente.</p>
-          </a>
-
-          <a href="#" class="quick-card">
-            <span class="quick-card__icon quick-card__icon--teal">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 3h7l3 3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 10h6M7 13h6M7 7h3"/></svg>
-            </span>
-            <h3 class="quick-card__title">Emitir Relatórios</h3>
-            <p class="quick-card__desc">Gere relatórios acadêmicos e administrativos.</p>
-          </a>
-
-        </div>
-      </section>
-
-    </main>
-  </div>
-</div>
-
-<script src="app.js"></script>
+  // Se já estiver logado, vai direto ao front.
+  fetch('/api/me').then((r) => { if (r.ok) location.replace('/front.html'); }).catch(() => {});
+</script>
 </body>
 </html>

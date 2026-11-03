@@ -1,0 +1,11 @@
+{
+  "name": "final-sipro",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": { "hash": "node scripts/hash.js" },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "bcryptjs": "^2.4.3"
+  }
+}
