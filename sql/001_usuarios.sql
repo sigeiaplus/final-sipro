@@ -14,11 +14,14 @@ create table if not exists public.usuarios (
 );
 
 create or replace function public.usuarios_set_updated_at()
-returns trigger language plpgsql as $$
+returns trigger
+language plpgsql
+as $fn$
 begin
   new.updated_at = now();
   return new;
-end $$;
+end;
+$fn$;
 
 drop trigger if exists usuarios_updated_at on public.usuarios;
 create trigger usuarios_updated_at
