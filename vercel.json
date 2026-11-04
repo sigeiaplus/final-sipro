@@ -1,4 +1,7 @@
 {
   "rewrites": [{ "source": "/front.html", "destination": "/api/front" }],
-  "functions": { "api/front.js": { "includeFiles": "private/**" } }
+  "functions": {
+    "api/front.js": { "includeFiles": "private/**" },
+    "api/pagina.js": { "includeFiles": "private/**" }
+  }
 }
